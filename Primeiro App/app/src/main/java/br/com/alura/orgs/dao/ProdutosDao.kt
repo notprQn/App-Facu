@@ -14,13 +14,7 @@ class ProdutosDao {
     }
 
     companion object {
-        private val produtos = mutableListOf<Produto>(
-            Produto(
-                nome = "Salada de frutas",
-                descricao = "Laranja, maçãs e uva",
-                valor = BigDecimal("19.83")
-            )
-        )
+        private val produtos = mutableListOf<Produto>()
     }
 
 }
