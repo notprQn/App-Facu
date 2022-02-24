@@ -1,14 +1,12 @@
 package br.com.alura.orgs.ui.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import br.com.alura.orgs.R
-import br.com.alura.orgs.dao.ProdutosDao
+import br.com.alura.orgs.database.AppDatabase
 import br.com.alura.orgs.databinding.ActivityFormularioProdutoBinding
-import br.com.alura.orgs.databinding.FormularioImagemBinding
+import br.com.alura.orgs.extensions.tentaCarregarImagem
 import br.com.alura.orgs.model.Produto
-import coil.load
+import br.com.alura.orgs.ui.dialog.FormularioImagemDialog
 import java.math.BigDecimal
 
 class FormularioProdutoActivity : AppCompatActivity() {
@@ -17,45 +15,41 @@ class FormularioProdutoActivity : AppCompatActivity() {
         ActivityFormularioProdutoBinding.inflate(layoutInflater)
     }
     private var url: String? = null
+    private var idProduto = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        title = "Cadastrar produto"
         configuraBotaoSalvar()
         binding.activityFormularioProdutoImagem.setOnClickListener {
-            val bindingFormularioImagem = FormularioImagemBinding.inflate(layoutInflater)
-            bindingFormularioImagem.formularioImagemBotaoCarregar.setOnClickListener {
-                val url = bindingFormularioImagem.formularioImagemUrl.text.toString()
-                bindingFormularioImagem.formularioImagemImageview.load(url){
-                    placeholder(R.drawable.gifloading)
-                    fallback(R.drawable.erro)
-                    error(R.drawable.erro)
+            FormularioImagemDialog(this)
+                .mostra(url) { imagem ->
+                    url = imagem
+                    binding.activityFormularioProdutoImagem.tentaCarregarImagem(url)
                 }
-            }
+        }
+        intent.getParcelableExtra<Produto>(CHAVE_PRODUTO)?.let { produtoCarregado ->
+            title = "Alterar Produto"
 
-            AlertDialog.Builder(this)
-                .setView(bindingFormularioImagem.root)
-                .setPositiveButton("Confirmar") { _, _ ->
-                    url = bindingFormularioImagem.formularioImagemUrl.text.toString()
-                    binding.activityFormularioProdutoImagem.load(url){
-                        fallback(R.drawable.erro)
-                        error(R.drawable.erro)
-                    }
-
-                }
-                .setNegativeButton("Cancelar") { _, _ ->
-
-                }
-                .show()
+            idProduto = produtoCarregado.id
+            binding.activityFormularioProdutoImagem.tentaCarregarImagem(produtoCarregado.imagem)
+            binding.activityFormularioProdutoNome
+                .setText(produtoCarregado.nome)
+            binding.activityFormularioProdutoDescricao
+                .setText(produtoCarregado.descricao)
+            binding.activityFormularioProdutoValor
+                .setText(produtoCarregado.valor.toPlainString())
         }
     }
 
     private fun configuraBotaoSalvar() {
         val botaoSalvar = binding.activityFormularioProdutoBotaoSalvar
-        val dao = ProdutosDao()
+        val db = AppDatabase.instancia(this)
+        val produtoDao = db.produtoDao()
         botaoSalvar.setOnClickListener {
             val produtoNovo = criaProduto()
-            dao.adiciona(produtoNovo)
+            produtoDao.salva(produtoNovo)
             finish()
         }
     }
