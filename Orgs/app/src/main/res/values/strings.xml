@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Orgs</string>
+    <string name="nome_asc">Nome Asc.</string>
+    <string name="nome_desc">Nome Desc.</string>
+    <string name="valor_asc">Valor Asc.</string>
+    <string name="valor_desc">Valor Desc.</string>
+    <string name="sem_filtro">Sem Filtro</string>
+</resources>

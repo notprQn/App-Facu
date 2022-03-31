@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_login_icon"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="@string/nome_asc"
+        app:showAsAction="ifRoom" />
+
+    <item android:title="@string/nome_asc"
+        android:id="@+id/menu_nome_asc"/>
+    <item android:title="@string/nome_desc"
+        android:id="@+id/menu_nome_desc"/>
+    <item android:title="@string/valor_asc"
+        android:id="@+id/menu_valor_asc"/>
+    <item android:title="@string/valor_desc"
+        android:id="@+id/menu_valor_desc"/>
+    <item android:title="@string/sem_filtro"
+        android:id="@+id/menu_sem_filtro"/>
+</menu>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "15429884450",
+    "project_id": "lista-de-compras-879d6",
+    "storage_bucket": "lista-de-compras-879d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15429884450:android:d7c1c2010381c30cdc087b",
+        "android_client_info": {
+          "package_name": "br.com.alura.orgs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "15429884450-6i82c0uprc9mi51scs0ib532hkeasgpe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqJiA3s3WiLgrC8Q8S33L7vrOuEgiUN2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "15429884450-6i82c0uprc9mi51scs0ib532hkeasgpe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
